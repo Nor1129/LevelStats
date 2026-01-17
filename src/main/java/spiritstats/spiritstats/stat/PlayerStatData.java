@@ -30,6 +30,12 @@ public class PlayerStatData {
     public void removeAttackGlyph(int v) { setAttackGlyph(attackGlyph - v); }
     public void removeDefenseGlyph(int v) { setDefenseGlyph(defenseGlyph - v); }
 
+
+    public void removePoint(int value) {
+        if (value <= 0) return;
+        statPoint = Math.max(0, statPoint - value);
+    }
+
     public boolean canAddResonance() {
         return resonance < 150;
     }

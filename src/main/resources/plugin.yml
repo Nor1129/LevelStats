@@ -11,4 +11,4 @@ commands:
 
 permissions:
   spiritstats.admin:
-    default: op
+    default: false

@@ -32,8 +32,8 @@ public final class SpiritStats extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new StatGUI(), this);
         getServer().getPluginManager().registerEvents(new MobKillListener(), this);
 
-        getCommand("스텟").setExecutor(new StatCommand());
-        getCommand("레벨").setExecutor(new LevelCommand());
+        getCommand("전투스텟").setExecutor(new StatCommand());
+        getCommand("전투레벨").setExecutor(new LevelCommand());
     }
 
     @Override
