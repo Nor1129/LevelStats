@@ -1,12 +1,13 @@
 package spiritstats.spiritstats.main;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import spiritstats.spiritstats.Listener.DamageListener;
 import spiritstats.spiritstats.Listener.JoinListener;
 import spiritstats.spiritstats.Listener.MobKillListener;
+import spiritstats.spiritstats.Listener.SpiritStatsListener;
 import spiritstats.spiritstats.api.SpiritStatsAPI;
 import spiritstats.spiritstats.level.LevelCommand;
 import spiritstats.spiritstats.level.LevelManager;
@@ -24,8 +25,8 @@ public final class SpiritStats extends JavaPlugin {
 
         StatManager.init(getDataFolder());
         LevelManager.init(getDataFolder());
-
-        getServer().getPluginManager().registerEvents((Listener) new SpiritStatsAPI(), this);
+        SpiritStatsAPI api = new SpiritStatsAPI();
+        Bukkit.getPluginManager().registerEvents(new SpiritStatsListener(api), this);
         getServer().getPluginManager().registerEvents(new DamageListener(), this);
         getServer().getPluginManager().registerEvents(new JoinListener(), this);
         getServer().getPluginManager().registerEvents(new StatGUI(), this);
