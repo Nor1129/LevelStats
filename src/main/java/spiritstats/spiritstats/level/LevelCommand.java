@@ -52,27 +52,11 @@ public class LevelCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length < 2) {
-            p.sendMessage("§8/전투레벨");
-            p.sendMessage("§8ㄴ §7[전투레벨추가] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 전투 레벨을 추가한다.");
-            p.sendMessage("");
-            p.sendMessage("§8ㄴ §7[전투레벨차감] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 전투 레벨을 차감한다.");
-            p.sendMessage("");
-            p.sendMessage("§8ㄴ §7[전투경험치추가] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 전투 경험치를 추가한다.");
-            p.sendMessage("");
-            p.sendMessage("§8ㄴ §7[전투경험치차감] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 전투 경험치를 차감한다.");
-            return true;
-        }
-
         PlayerLevelData d = LevelManager.get(p);
         int value;
 
         try {
-            value = Integer.parseInt(args[1]);
+            value = Integer.parseInt(args[2]);
         } catch (NumberFormatException e) {
             p.sendMessage("§c§l[!] 수치는 숫자여야 합니다.");
             return true;
@@ -97,7 +81,21 @@ public class LevelCommand implements CommandExecutor {
                 p.sendMessage("§a§l[!] 전투경험치 -" + value + "만큼 추가 되었습니다!");
             }
             default -> {
-                p.sendMessage("§c§l[!] 알 수 없는 명령어입니다!");
+                p.sendMessage("§8/전투레벨");
+                p.sendMessage("§8ㄴ §7[정보] [닉네임]");
+                p.sendMessage("§8- §f해당 플레이어에게 전투 정보를 보여준다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[전투레벨추가] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 전투 레벨을 추가한다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[전투레벨차감] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 전투 레벨을 차감한다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[전투경험치추가] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 전투 경험치를 추가한다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[전투경험치차감] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 전투 경험치를 차감한다.");
                 return true;
             }
         }

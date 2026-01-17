@@ -55,19 +55,19 @@ public class StatCommand implements CommandExecutor {
 
         if (args.length < 4) {
             p.sendMessage("§8/전투스텟");
-            p.sendMessage("§8ㄴ §7[공명] [닉네임] [추가/차감] [수치]");
+            p.sendMessage("§8ㄴ §7[공명] [추가/차감] [닉네임] [수치]");
             p.sendMessage("§8- §f해당 플레이어에게 공명 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
-            p.sendMessage("§8ㄴ §7[흐름] [닉네임] [추가/차감] [수치]");
+            p.sendMessage("§8ㄴ §7[흐름] [추가/차감] [닉네임] [수치]");
             p.sendMessage("§8- §f해당 플레이어에게 흐름 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
-            p.sendMessage("§8ㄴ §7[공격문양] [닉네임] [추가/차감] [수치]");
+            p.sendMessage("§8ㄴ §7[공격문양] [추가/차감] [닉네임] [수치]");
             p.sendMessage("§8- §f해당 플레이어에게 공격문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
-            p.sendMessage("§8ㄴ §7[방어문양] [닉네임] [추가/차감] [수치]");
+            p.sendMessage("§8ㄴ §7[방어문양] [추가/차감] [닉네임] [수치]");
             p.sendMessage("§8- §f해당 플레이어에게 방어문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
-            p.sendMessage("§8ㄴ §7[포인트] [닉네임] [추가/차감] [수치]");
+            p.sendMessage("§8ㄴ §7[포인트] [추가/차감] [닉네임] [수치]");
             p.sendMessage("§8- §f해당 플레이어에게 스텟 포인트를 수치만큼 추가 또는 차감합니다.");
             return true;
         }
@@ -160,7 +160,21 @@ public class StatCommand implements CommandExecutor {
             }
 
             default -> {
-                p.sendMessage("§c§l[!] 알 수 없는 스텟입니다.");
+                p.sendMessage("§8/전투스텟");
+                p.sendMessage("§8ㄴ §7[공명] [추가/차감] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 공명 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[흐름] [추가/차감] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 흐름 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[공격문양] [추가/차감] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 공격문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[방어문양] [추가/차감] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 방어문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("");
+                p.sendMessage("§8ㄴ §7[포인트] [추가/차감] [닉네임] [수치]");
+                p.sendMessage("§8- §f해당 플레이어에게 스텟 포인트를 수치만큼 추가 또는 차감합니다.");
                 return true;
             }
         }
