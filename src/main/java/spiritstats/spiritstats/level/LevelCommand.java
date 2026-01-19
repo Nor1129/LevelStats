@@ -111,11 +111,20 @@ public class LevelCommand implements CommandExecutor {
                     return true;
                 }
 
+                int amount;
+                try {
+                    amount = Integer.parseInt(args[2]);
+                } catch (NumberFormatException e) {
+                    p.sendMessage("§c§l[!] 수치는 숫자여야 합니다.");
+                    return true;
+                }
+
                 int addLevel = Math.min(value, maxLevel - currentLevel);
 
                 d.addLevel(addLevel);
 
                 PlayerStatData stat = StatManager.get(target);
+                d.addLevelHpBonus(amount * LevelManager.HP_PER_LEVEL);
                 stat.addPoint(addLevel * LevelManager.STAT_PER_LEVEL);
 
                 StatApplier.apply(target);
