@@ -99,64 +99,67 @@ public class StatCommand implements CommandExecutor {
         switch (stat) {
 
             case "공명" -> {
-                if (action.equals("추가"))
+                if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getResonance() < 150; i++) d.addResonance();
+                    p.sendMessage("§a§l[!] 공명 스텟이 +" + value + " 만큼 추가되었습니다!");
 
-                else if ((action.equals("차감"))) {
+                } else if ((action.equals("차감"))) {
                     d.removeResonance(value);
-                    p.sendMessage("§a§l[!] " + value + "만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 공명 스텟이 -" + value + " 만큼 차감되었습니다!");
 
                 } else
-                    p.sendMessage("§a§l/전투스텟 [공명] [닉네임] [추가/차감] [수치]");
+                    return true;
             }
 
 
             case "흐름" -> {
-                if (action.equals("추가"))
+                if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getFlow() < 150; i++) d.addFlow();
+                    p.sendMessage("§a§l[!] 흐름 스텟이 +" + value + " 만큼 추가되었습니다!");
 
-                else if ((action.equals("차감"))) {
+                } else if ((action.equals("차감"))) {
                     d.removeFlow(value);
-                    p.sendMessage("§a§l[!] " + value + "만큼 차감되었습니다!");
-
+                    p.sendMessage("§a§l[!] 흐름 스텟이 -" + value + " 만큼 차감되었습니다!");
                 } else
-                    p.sendMessage("§a§l/전투스텟 [흐름] [닉네임] [추가/차감] [수치]");
+                    return true;
             }
 
             case "공격문양" -> {
-                if (action.equals("추가"))
+                if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getAttackGlyph() < 150; i++) d.addAttackGlyph();
+                    p.sendMessage("§a§l[!] 공격문양 스텟이 +" + value + " 만큼 추가되었습니다!");
 
-                else if ((action.equals("차감"))) {
+                } else if ((action.equals("차감"))) {
                     d.removeAttackGlyph(value);
-                    p.sendMessage("§a§l[!] " + value + "만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 공격문양 스텟이 -" + value + " 만큼 차감되었습니다!");
 
                 } else
-                    p.sendMessage("§a§l/전투스텟 [공격문양] [닉네임] [추가/차감] [수치]");
+                    return true;
             }
 
             case "방어문양" -> {
-                if (action.equals("추가"))
+                if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getDefenseGlyph() < 150; i++) d.addDefenseGlyph();
+                    p.sendMessage("§a§l[!] 방어문양 스텟이 +" + value + " 만큼 추가되었습니다!");
 
-                else if ((action.equals("차감"))) {
+                } else if ((action.equals("차감"))) {
                     d.removeDefenseGlyph(value);
-                    p.sendMessage("§a§l[!] " + value + "만큼 차감되었습니다!");
-
+                    p.sendMessage("§a§l[!] 방어문양 스텟이 -" + value + " 만큼 차감되었습니다!");
                 } else
-                    p.sendMessage("§a§l/전투스텟 [방어문양] [닉네임] [추가/차감] [수치]");
+                    return true;
             }
 
             case "포인트" -> {
-                if (action.equals("추가"))
+                if (action.equals("추가")) {
                     d.addPoint(value);
+                    p.sendMessage("§a§l[!] 포인트가 +" + value + " 만큼 추가되었습니다!");
 
-                else if ((action.equals("차감"))) {
+                } else if ((action.equals("차감"))) {
                     d.removePoint(value);
-                    p.sendMessage("§a§l[!] " + value + "만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 포인트가 -" + value + " 만큼 차감되었습니다!");
 
                 } else
-                    p.sendMessage("§a§l/전투스텟 [포인트] [닉네임] [추가/차감] [수치]");
+                    return true;
             }
 
             default -> {
@@ -181,7 +184,6 @@ public class StatCommand implements CommandExecutor {
 
         StatApplier.apply(target);
         StatManager.save(target);
-        p.sendMessage("§a§l[!] " + target.getName() + "님의 스텟이 추가되었습니다.");
         return true;
     }
 }

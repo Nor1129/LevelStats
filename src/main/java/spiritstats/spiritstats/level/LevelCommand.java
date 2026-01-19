@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class LevelCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String l, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (!(sender instanceof Player p)) return true;
 
@@ -25,7 +25,9 @@ public class LevelCommand implements CommandExecutor {
             return true;
         }
 
-        if (args[0].equals("정보")) {
+        String sub = args[0];
+
+        if (sub.equals("정보")) {
             if (args.length < 2) {
                 p.sendMessage("§c§l[!] /전투레벨 정보 [닉네임]");
                 return true;
@@ -46,15 +48,39 @@ public class LevelCommand implements CommandExecutor {
             return true;
         }
 
-        if (args[0].equals("리로드")) {
+        if (sub.equals("리로드")) {
             LevelManager.reloadAll();
             p.sendMessage("§a§l[!] 전투레벨 데이터를 리로드했습니다.");
             return true;
         }
 
-        PlayerLevelData d = LevelManager.get(p);
-        int value;
+        if (args.length < 3) {
+            p.sendMessage("§8/전투레벨");
+            p.sendMessage("§8ㄴ §7[정보] [닉네임]");
+            p.sendMessage("§8- §f해당 플레이어에게 전투 정보를 보여준다.");
+            p.sendMessage("");
+            p.sendMessage("§8ㄴ §7[전투레벨추가] [닉네임] [수치]");
+            p.sendMessage("§8- §f해당 플레이어에게 전투 레벨을 추가한다.");
+            p.sendMessage("");
+            p.sendMessage("§8ㄴ §7[전투레벨차감] [닉네임] [수치]");
+            p.sendMessage("§8- §f해당 플레이어에게 전투 레벨을 차감한다.");
+            p.sendMessage("");
+            p.sendMessage("§8ㄴ §7[전투경험치추가] [닉네임] [수치]");
+            p.sendMessage("§8- §f해당 플레이어에게 전투 경험치를 추가한다.");
+            p.sendMessage("");
+            p.sendMessage("§8ㄴ §7[전투경험치차감] [닉네임] [수치]");
+            p.sendMessage("§8- §f해당 플레이어에게 전투 경험치를 차감한다.");
+            return true;
+        }
 
+        String targetName = args[1];
+        Player target = p.getServer().getPlayer(targetName);
+        if (target == null) {
+            p.sendMessage("§c§l[!] 플레이어를 찾을 수 없습니다.");
+            return true;
+        }
+
+        int value;
         try {
             value = Integer.parseInt(args[2]);
         } catch (NumberFormatException e) {
@@ -62,24 +88,30 @@ public class LevelCommand implements CommandExecutor {
             return true;
         }
 
-        switch (args[0]) {
+        PlayerLevelData d = LevelManager.get(target);
+
+        switch (sub) {
             case "전투레벨추가" -> {
                 d.addLevel(value);
-                p.sendMessage("§a§l[!] 전투레벨 +" + value + "만큼 추가 되었습니다!");
+                p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 +" + value + " 만큼 추가되었습니다!");
             }
+
             case "전투레벨차감" -> {
                 d.addLevel(-value);
-                p.sendMessage("§a§l[!] 전투레벨 -" + value + "만큼 차감 되었습니다!");
+                p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 -" + value + " 만큼 차감되었습니다!");
             }
+
             case "전투경험치추가" -> {
                 d.addExp(value);
-                LevelSystem.checkLevelUp(p);
-                p.sendMessage("§a§l[!] 전투경험치 +" + value + "만큼 추가 되었습니다!");
+                LevelSystem.checkLevelUp(target);
+                p.sendMessage("§a§l[!] " + target.getName() + " 전투경험치 +" + value + " 만큼 추가되었습니다!");
             }
+
             case "전투경험치차감" -> {
                 d.addExp(-value);
-                p.sendMessage("§a§l[!] 전투경험치 -" + value + "만큼 추가 되었습니다!");
+                p.sendMessage("§a§l[!] " + target.getName() + " 전투경험치 -" + value + " 만큼 차감되었습니다!");
             }
+
             default -> {
                 p.sendMessage("§8/전투레벨");
                 p.sendMessage("§8ㄴ §7[정보] [닉네임]");
@@ -100,7 +132,7 @@ public class LevelCommand implements CommandExecutor {
             }
         }
 
-        LevelManager.save(p);
+        LevelManager.save(target);
         return true;
     }
 }

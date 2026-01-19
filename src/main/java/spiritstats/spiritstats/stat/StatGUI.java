@@ -60,7 +60,7 @@ public class StatGUI implements Listener {
         }
 
         if (!d.usePoint()) {
-            p.sendMessage("§c포인트가 부족합니다.");
+            p.sendMessage("§c스텟 포인트가 부족합니다.");
             return;
         }
 

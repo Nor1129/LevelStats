@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class LevelManager {
 
+    public static final double HP_PER_LEVEL = 10.0;
     private static File folder;
     private static final Map<UUID, PlayerLevelData> dataMap = new HashMap<>();
 
