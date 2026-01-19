@@ -1,8 +1,8 @@
 package spiritstats.spiritstats.level;
 
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import spiritstats.spiritstats.stat.PlayerStatData;
+import spiritstats.spiritstats.stat.StatApplier;
 import spiritstats.spiritstats.stat.StatManager;
 
 public class LevelSystem {
@@ -24,7 +24,8 @@ public class LevelSystem {
 
             stat.addPoint(LevelManager.STAT_PER_LEVEL);
 
-            increaseMaxHealth(p, LevelManager.HP_PER_LEVEL);
+            d.addLevelHpBonus(LevelManager.HP_PER_LEVEL);
+            StatApplier.apply(p);
 
             leveledUp = true;
 
@@ -38,17 +39,6 @@ public class LevelSystem {
         if (leveledUp) {
             LevelManager.save(p);
             StatManager.save(p);
-        }
-    }
-
-    private static void increaseMaxHealth(Player p, double amount) {
-        double currentMax = p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
-        double newMax = currentMax + amount;
-
-        p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(newMax);
-
-        if (p.getHealth() > newMax) {
-            p.setHealth(newMax);
         }
     }
 }

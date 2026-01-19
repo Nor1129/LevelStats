@@ -2,6 +2,9 @@ package spiritstats.spiritstats.level;
 
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+import spiritstats.spiritstats.stat.StatApplier;
+
+import java.text.DecimalFormat;
 
 public class LevelCommand implements CommandExecutor {
 
@@ -10,12 +13,15 @@ public class LevelCommand implements CommandExecutor {
 
         if (!(sender instanceof Player p)) return true;
 
+
         if (args.length == 0) {
             PlayerLevelData d = LevelManager.get(p);
+            DecimalFormat df = new DecimalFormat("#,###");
+            String getExp = df.format(d.getExp());
             p.sendMessage("");
             p.sendMessage("§c[ 전투 레벨 정보 ]");
             p.sendMessage("§e전투레벨: §f" + d.getLevel());
-            p.sendMessage("§7전투경험치: §f" + d.getExp());
+            p.sendMessage("§7전투경험치: §f" + getExp);
             p.sendMessage("");
             return true;
         }
@@ -40,10 +46,12 @@ public class LevelCommand implements CommandExecutor {
             }
 
             PlayerLevelData d = LevelManager.get(target);
+            DecimalFormat df = new DecimalFormat("#,###");
+            String getExp = df.format(d.getExp());
             p.sendMessage("");
             p.sendMessage("§c[ " + target.getName() + " 전투 레벨 정보 ]");
             p.sendMessage("§e전투레벨: §f" + d.getLevel());
-            p.sendMessage("§7전투경험치: §f" + d.getExp());
+            p.sendMessage("§7전투경험치: §f" + getExp);
             p.sendMessage("");
             return true;
         }
@@ -93,11 +101,22 @@ public class LevelCommand implements CommandExecutor {
         switch (sub) {
             case "전투레벨추가" -> {
                 d.addLevel(value);
+                LevelSystem.checkLevelUp(target);
+
+                d.addLevelHpBonus(value * LevelManager.HP_PER_LEVEL);
+
+                StatApplier.apply(target);
+                LevelManager.save(target);
+
                 p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 +" + value + " 만큼 추가되었습니다!");
             }
 
             case "전투레벨차감" -> {
                 d.addLevel(-value);
+                d.addLevelHpBonus(-value * LevelManager.HP_PER_LEVEL);
+
+                StatApplier.apply(target);
+                LevelManager.save(target);
                 p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 -" + value + " 만큼 차감되었습니다!");
             }
 
