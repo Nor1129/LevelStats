@@ -38,4 +38,8 @@ public class PlayerLevelData {
     public void addLevelHpBonus(double amount) {
         this.levelHpBonus += amount;
     }
+
+    public void setLevelHpBonus(int value) {
+        this.levelHpBonus = Math.max(0, value);
+    }
 }

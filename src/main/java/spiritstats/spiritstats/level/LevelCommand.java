@@ -2,7 +2,9 @@ package spiritstats.spiritstats.level;
 
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+import spiritstats.spiritstats.stat.PlayerStatData;
 import spiritstats.spiritstats.stat.StatApplier;
+import spiritstats.spiritstats.stat.StatManager;
 
 import java.text.DecimalFormat;
 
@@ -100,24 +102,53 @@ public class LevelCommand implements CommandExecutor {
 
         switch (sub) {
             case "전투레벨추가" -> {
-                d.addLevel(value);
-                LevelSystem.checkLevelUp(target);
 
-                d.addLevelHpBonus(value * LevelManager.HP_PER_LEVEL);
+                int maxLevel = 70;
+                int currentLevel = d.getLevel();
+
+                if (currentLevel >= maxLevel) {
+                    p.sendMessage("§c§l[!] 해당 플레이어는 이미 최대 전투레벨입니다.");
+                    return true;
+                }
+
+                int addLevel = Math.min(value, maxLevel - currentLevel);
+
+                d.addLevel(addLevel);
+
+                PlayerStatData stat = StatManager.get(target);
+                stat.addPoint(addLevel * LevelManager.STAT_PER_LEVEL);
 
                 StatApplier.apply(target);
                 LevelManager.save(target);
+                StatManager.save(target);
 
-                p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 +" + value + " 만큼 추가되었습니다!");
+                p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 +" + addLevel + " 만큼 추가되었습니다!");
             }
 
+
             case "전투레벨차감" -> {
-                d.addLevel(-value);
-                d.addLevelHpBonus(-value * LevelManager.HP_PER_LEVEL);
+                int current = d.getLevel();
+                int amount;
+                try {
+                    amount = Integer.parseInt(args[2]);
+                } catch (NumberFormatException e) {
+                    p.sendMessage("§c§l[!] 수치는 숫자여야 합니다.");
+                    return true;
+                }
+                int real = Math.min(amount, current - 1);
+
+                if (real <= 0) {
+                    p.sendMessage("§c§l[!] 더 이상 레벨을 차감할 수 없습니다.");
+                    return true;
+                }
+
+                d.addLevel(-real);
+                d.addLevelHpBonus(-real * LevelManager.HP_PER_LEVEL);
 
                 StatApplier.apply(target);
                 LevelManager.save(target);
-                p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 -" + value + " 만큼 차감되었습니다!");
+
+                p.sendMessage("§a§l[!] " + target.getName() + " 전투레벨 -" + real + " 만큼 차감되었습니다!");
             }
 
             case "전투경험치추가" -> {
