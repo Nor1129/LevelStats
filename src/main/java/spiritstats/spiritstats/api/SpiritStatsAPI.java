@@ -2,6 +2,7 @@ package spiritstats.spiritstats.api;
 
 import org.bukkit.entity.Player;
 import spiritstats.spiritstats.level.LevelManager;
+import spiritstats.spiritstats.level.LevelSystem;
 import spiritstats.spiritstats.level.PlayerLevelData;
 import spiritstats.spiritstats.stat.PlayerStatData;
 import spiritstats.spiritstats.stat.StatManager;
@@ -19,6 +20,9 @@ public class SpiritStatsAPI {
     public static void addExp(Player player, int amount) {
         PlayerLevelData data = LevelManager.get(player);
         data.addExp(amount);
+
+        LevelSystem.checkLevelUp(player);
+
         LevelManager.save(player);
     }
 
