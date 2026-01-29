@@ -16,7 +16,7 @@ public class StatCommand implements CommandExecutor {
 
         if (args[0].equals("정보")) {
             if (args.length < 2) {
-                p.sendMessage("§c/전투스텟 정보 [닉네임]");
+                p.sendMessage("§c/전투스탯 정보 [닉네임]");
                 return true;
             }
 
@@ -27,7 +27,7 @@ public class StatCommand implements CommandExecutor {
             }
 
             PlayerStatData d = StatManager.get(target);
-            p.sendMessage("§6[ " + target.getName() + " 전투 스텟 정보 ]");
+            p.sendMessage("§6[ " + target.getName() + " 전투 스탯 정보 ]");
             p.sendMessage("§e공명: §f" + d.getResonance());
             p.sendMessage("§e흐름: §f" + d.getFlow());
             p.sendMessage("§c공격 문양: §f" + d.getAttackGlyph());
@@ -37,7 +37,7 @@ public class StatCommand implements CommandExecutor {
         }
 
         if (!p.hasPermission("spiritstats.admin")) {
-            p.sendMessage("§c§l[!] 스텟 권한이 없습니다.");
+            p.sendMessage("§c§l[!] 스탯 권한이 없습니다.");
             return true;
         }
 
@@ -49,26 +49,26 @@ public class StatCommand implements CommandExecutor {
             }
 
             StatManager.reloadAll();
-            p.sendMessage("§a§l[!] 스텟 데이터를 리로드했습니다.");
+            p.sendMessage("§a§l[!] 스탯 데이터를 리로드했습니다.");
             return true;
         }
 
         if (args.length < 4) {
-            p.sendMessage("§8/전투스텟");
+            p.sendMessage("§8/전투스탯");
             p.sendMessage("§8ㄴ §7[공명] [추가/차감] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 공명 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+            p.sendMessage("§8- §f해당 플레이어에게 공명 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
             p.sendMessage("§8ㄴ §7[흐름] [추가/차감] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 흐름 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+            p.sendMessage("§8- §f해당 플레이어에게 흐름 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
             p.sendMessage("§8ㄴ §7[공격문양] [추가/차감] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 공격문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+            p.sendMessage("§8- §f해당 플레이어에게 공격문양 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
             p.sendMessage("§8ㄴ §7[방어문양] [추가/차감] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 방어문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+            p.sendMessage("§8- §f해당 플레이어에게 방어문양 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
             p.sendMessage("");
             p.sendMessage("§8ㄴ §7[포인트] [추가/차감] [닉네임] [수치]");
-            p.sendMessage("§8- §f해당 플레이어에게 스텟 포인트를 수치만큼 추가 또는 차감합니다.");
+            p.sendMessage("§8- §f해당 플레이어에게 스탯 포인트를 수치만큼 추가 또는 차감합니다.");
             return true;
         }
 
@@ -101,11 +101,11 @@ public class StatCommand implements CommandExecutor {
             case "공명" -> {
                 if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getResonance() < 150; i++) d.addResonance();
-                    p.sendMessage("§a§l[!] 공명 스텟이 +" + value + " 만큼 추가되었습니다!");
+                    p.sendMessage("§a§l[!] 공명 스탯이 +" + value + " 만큼 추가되었습니다!");
 
                 } else if ((action.equals("차감"))) {
                     d.removeResonance(value);
-                    p.sendMessage("§a§l[!] 공명 스텟이 -" + value + " 만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 공명 스탯이 -" + value + " 만큼 차감되었습니다!");
 
                 } else
                     return true;
@@ -115,11 +115,11 @@ public class StatCommand implements CommandExecutor {
             case "흐름" -> {
                 if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getFlow() < 150; i++) d.addFlow();
-                    p.sendMessage("§a§l[!] 흐름 스텟이 +" + value + " 만큼 추가되었습니다!");
+                    p.sendMessage("§a§l[!] 흐름 스탯이 +" + value + " 만큼 추가되었습니다!");
 
                 } else if ((action.equals("차감"))) {
                     d.removeFlow(value);
-                    p.sendMessage("§a§l[!] 흐름 스텟이 -" + value + " 만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 흐름 스탯이 -" + value + " 만큼 차감되었습니다!");
                 } else
                     return true;
             }
@@ -127,11 +127,11 @@ public class StatCommand implements CommandExecutor {
             case "공격문양" -> {
                 if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getAttackGlyph() < 150; i++) d.addAttackGlyph();
-                    p.sendMessage("§a§l[!] 공격문양 스텟이 +" + value + " 만큼 추가되었습니다!");
+                    p.sendMessage("§a§l[!] 공격문양 스탯이 +" + value + " 만큼 추가되었습니다!");
 
                 } else if ((action.equals("차감"))) {
                     d.removeAttackGlyph(value);
-                    p.sendMessage("§a§l[!] 공격문양 스텟이 -" + value + " 만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 공격문양 스탯이 -" + value + " 만큼 차감되었습니다!");
 
                 } else
                     return true;
@@ -140,11 +140,11 @@ public class StatCommand implements CommandExecutor {
             case "방어문양" -> {
                 if (action.equals("추가")) {
                     for (int i = 0; i < value && d.getDefenseGlyph() < 150; i++) d.addDefenseGlyph();
-                    p.sendMessage("§a§l[!] 방어문양 스텟이 +" + value + " 만큼 추가되었습니다!");
+                    p.sendMessage("§a§l[!] 방어문양 스탯이 +" + value + " 만큼 추가되었습니다!");
 
                 } else if ((action.equals("차감"))) {
                     d.removeDefenseGlyph(value);
-                    p.sendMessage("§a§l[!] 방어문양 스텟이 -" + value + " 만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 방어문양 스탯이 -" + value + " 만큼 차감되었습니다!");
                 } else
                     return true;
             }
@@ -152,32 +152,32 @@ public class StatCommand implements CommandExecutor {
             case "포인트" -> {
                 if (action.equals("추가")) {
                     d.addPoint(value);
-                    p.sendMessage("§a§l[!] 포인트가 +" + value + " 만큼 추가되었습니다!");
+                    p.sendMessage("§a§l[!] 스탯이 포인트가 +" + value + " 만큼 추가되었습니다!");
 
                 } else if ((action.equals("차감"))) {
                     d.removePoint(value);
-                    p.sendMessage("§a§l[!] 포인트가 -" + value + " 만큼 차감되었습니다!");
+                    p.sendMessage("§a§l[!] 스탯이 포인트가 -" + value + " 만큼 차감되었습니다!");
 
                 } else
                     return true;
             }
 
             default -> {
-                p.sendMessage("§8/전투스텟");
+                p.sendMessage("§8/전투스탯");
                 p.sendMessage("§8ㄴ §7[공명] [추가/차감] [닉네임] [수치]");
-                p.sendMessage("§8- §f해당 플레이어에게 공명 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("§8- §f해당 플레이어에게 공명 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
                 p.sendMessage("");
                 p.sendMessage("§8ㄴ §7[흐름] [추가/차감] [닉네임] [수치]");
-                p.sendMessage("§8- §f해당 플레이어에게 흐름 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("§8- §f해당 플레이어에게 흐름 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
                 p.sendMessage("");
                 p.sendMessage("§8ㄴ §7[공격문양] [추가/차감] [닉네임] [수치]");
-                p.sendMessage("§8- §f해당 플레이어에게 공격문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("§8- §f해당 플레이어에게 공격문양 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
                 p.sendMessage("");
                 p.sendMessage("§8ㄴ §7[방어문양] [추가/차감] [닉네임] [수치]");
-                p.sendMessage("§8- §f해당 플레이어에게 방어문양 스텟 레벨을 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("§8- §f해당 플레이어에게 방어문양 스탯 레벨을 수치만큼 추가 또는 차감합니다.");
                 p.sendMessage("");
                 p.sendMessage("§8ㄴ §7[포인트] [추가/차감] [닉네임] [수치]");
-                p.sendMessage("§8- §f해당 플레이어에게 스텟 포인트를 수치만큼 추가 또는 차감합니다.");
+                p.sendMessage("§8- §f해당 플레이어에게 스탯 포인트를 수치만큼 추가 또는 차감합니다.");
                 return true;
             }
         }

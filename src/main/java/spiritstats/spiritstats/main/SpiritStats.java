@@ -32,14 +32,17 @@ public final class SpiritStats extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new StatGUI(), this);
         getServer().getPluginManager().registerEvents(new MobKillListener(), this);
 
-        getCommand("전투스텟").setExecutor(new StatCommand());
+        getCommand("전투스탯").setExecutor(new StatCommand());
         getCommand("전투레벨").setExecutor(new LevelCommand());
+
+        getLogger().info("Dev.노아 - 전투 스탯 및 레벨 플러그인 활성화!");
     }
 
     @Override
     public void onDisable() {
         StatManager.saveAll();
         LevelManager.saveAll();
+        getLogger().info("Dev.노아 - 전투 스탯 및 레벨 플러그인 활성화!");
     }
 
     public static SpiritStats getInstance() {

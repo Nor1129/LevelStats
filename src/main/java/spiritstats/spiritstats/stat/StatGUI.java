@@ -13,7 +13,7 @@ public class StatGUI implements Listener {
     public static void open(Player p) {
         PlayerStatData d = StatManager.get(p);
 
-        Inventory inv = Bukkit.createInventory(null, 36, "§8[스텟]");
+        Inventory inv = Bukkit.createInventory(null, 36, "§8[스탯]");
 
         inv.setItem(10, item(Material.SHIELD, "§b공명", d.getResonance()));
         inv.setItem(12, item(Material.FEATHER, "§a흐름", d.getFlow()));
@@ -34,7 +34,7 @@ public class StatGUI implements Listener {
 
     @EventHandler
     public void onClick(InventoryClickEvent e) {
-        if (!e.getView().getTitle().equals("§8[스텟]")) return;
+        if (!e.getView().getTitle().equals("§8[스탯]")) return;
         if (e.getClickedInventory() == null) return;
         if (!e.getClickedInventory().equals(e.getView().getTopInventory())) return;
 
@@ -55,12 +55,12 @@ public class StatGUI implements Listener {
         };
 
         if (!canIncrease) {
-            p.sendMessage("§c이미 해당 스텟은 최대치입니다. (150)");
+            p.sendMessage("§c이미 해당 스탯은 최대치입니다. (150)");
             return;
         }
 
         if (!d.usePoint()) {
-            p.sendMessage("§c스텟 포인트가 부족합니다.");
+            p.sendMessage("§c스탯 포인트가 부족합니다.");
             return;
         }
 

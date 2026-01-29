@@ -3,8 +3,8 @@ version: '1.0-SNAPSHOT'
 main: spiritstats.spiritstats.main.SpiritStats
 api-version: '1.20'
 commands:
-  전투스텟:
-    description: 스텟 분배 및 관리 명령어
+  전투스탯:
+    description: 스탯 분배 및 관리 명령어
 
   전투레벨:
     description: 레벨 관리 명령어
