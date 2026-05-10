@@ -1,0 +1,24 @@
+name: jobslevelpl
+version: '1.0-SNAPSHOT'
+main: jobslevelpl.jobslevelpl.Jobslevelpl
+api-version: '1.20'
+depend: [SpiritStats]
+commands:
+  레벨:
+    description: 특정 플레이어의 채광,농사,낚시 레벨 또는 경험치를 추가/삭제/확인 합니다.
+    usage: /레벨 [닉네임] [채광/농사/낚시/확인] [레벨추가|레벨삭제|경험치추가|경험치삭제] [숫자]
+    permission: lifelevelup.command.level
+
+  직업:
+    description: 플레이어의 직업을 설정합니다.
+    usage: /직업 <플레이어닉네임> [<직업이름>/제거] [<직업이름>]
+    permission: jobsscoreboard.admin
+
+permissions:
+  lifelevelup.command.level:
+    description: "직업 설정 명령어 사용 권한"
+    default: op
+
+  jobsscoreboard.admin:
+    description: "직업 설정 명령어 사용 권한"
+    default: op
