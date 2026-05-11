@@ -74,4 +74,14 @@ public class DataAPI {
     public static void addFishingExperience(Player player, int exp) {
         getData(player.getUniqueId()).addFishingExperience(exp);
     }
+
+    public static void updateBossBar(Player player, String skill) {
+        Jobslevelpl plugin = Jobslevelpl.getInstance();
+
+        if (plugin == null) {
+            throw new IllegalStateException("Jobslevelpl 플러그인이 로드되지 않았습니다.");
+        }
+
+        plugin.updateBossBar(player, skill);
+    }
 }
