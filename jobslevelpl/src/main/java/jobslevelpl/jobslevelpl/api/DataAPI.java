@@ -84,4 +84,14 @@ public class DataAPI {
 
         plugin.updateBossBar(player, skill);
     }
+
+    public static java.util.List<String> getJobs(Player player) {
+        Jobslevelpl plugin = Jobslevelpl.getInstance();
+
+        if (plugin == null) {
+            throw new IllegalStateException("Jobslevelpl 플러그인이 로드되지 않았습니다.");
+        }
+
+        return plugin.getPlayerJobs().get(player.getUniqueId().toString());
+    }
 }
